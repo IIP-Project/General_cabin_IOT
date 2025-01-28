@@ -1,2 +1,9 @@
 # General_cabin_IOT
-Control over  IOT devices
+
+# Team Members
+
+- Amina Znine
+- Artem Suzi
+- Andrei Ziber
+- Vlad Starukh
+- Oskari Laitinen
