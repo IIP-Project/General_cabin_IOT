@@ -3,6 +3,7 @@ import { MoodCard } from "@/components/MoodCard";
 import { SensorDisplay } from "@/components/SensorDisplay";
 import { MoodSettings } from "@/components/MoodSettings";
 import { Moon, Sun, Heart, Coffee, Zap } from "lucide-react";
+import { toast } from "sonner";
 
 const moods = [
   {
@@ -66,6 +67,7 @@ const Index = () => {
 
   const handleMoodSelect = (moodName: string) => {
     setActiveMood(moodName);
+    toast.success(`${moodName} mood activated`);
     console.log(`Selected mood: ${moodName}`);
     // Here we'll add the logic to communicate with the Raspberry Pi
   };
@@ -73,23 +75,27 @@ const Index = () => {
   const selectedMood = moods.find(mood => mood.name === activeMood);
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-7xl mx-auto px-4 py-8 space-y-8">
-        <header className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-3">Cabin Mood Control</h1>
+    <div className="min-h-screen bg-gradient-to-b from- background to-secondary/20 ">
+      <div className="max-w-7xl mx-auto px-4 py-12 space-y-10">
+        <header className="text-center mb-16 animate-fade-in">
+          <h1 className="text-5xl font-bold mb-4 bg-clip-text text-transparent 
+          bg-gradient-to-r from-primary to-primary/60" > Cabin Mood Control
+          </h1>
           <p className="text-muted-foreground text-lg">
-            Customize your cabin environment to match your mood
+            Customize your cabin environment to match your mood. Select a mood to automatically adjust temprature, music, and lighting.
+
           </p>
         </header>
 
-        <div className="bg-secondary/20 rounded-lg p-6 mb-8">
+        <div className="bg-secondary/30  backdrop-blur-sm rounded-xl p-8  shadow-lg mb-
+        12 animate-fade-in ">
           <SensorDisplay
             temperature={sensorData.temperature}
             humidity={sensorData.humidity}
           />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 animate-fade-in">
           {moods.map((mood) => (
             <MoodCard
               key={mood.name}
@@ -103,8 +109,9 @@ const Index = () => {
         </div>
 
         {selectedMood && (
-          <div className="mt-12 bg-secondary/20 rounded-lg p-6">
-            <h2 className="text-2xl font-semibold mb-6 text-center">Current Mood Settings</h2>
+          <div className="mt-16 bg-secondary/30 backdrop-blur-sm rounded -xl p-
+          8 shadow-lg animate-fade-in">
+            <h2 className="text-3xl font-semibold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-primary to primary/60">Current Mood Settings</h2>
             <MoodSettings mood={selectedMood.settings} />
           </div>
         )}
